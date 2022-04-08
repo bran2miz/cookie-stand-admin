@@ -34,7 +34,7 @@ export default function CookieStandAdmin() {
       <Header />
       <main className='p-6 bg-emerald-50'>
         <CreateForm onCreate={handleCreate} />
-        <Table hours={hours} storeList={storeList} /> 
+        <Table storeList={storeList} /> 
       </main>
       <Footer />
       
