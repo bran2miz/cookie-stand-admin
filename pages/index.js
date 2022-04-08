@@ -9,20 +9,20 @@ import {useState} from 'react'
 
 export default function CookieStandAdmin() {
 
-  const [storeList, setStoreList] = useState([])
+  const [storeList, setStoreList] = useState({})
   
 
-  function handleCreate(location, min_cust_per_hour, max_cust_per_hour, avg_cookies_per_sale) {
+  function handleCreate(event) {
+    event.preventDefault();
     
-    const newStore = {
-      location,
-      min_cust_per_hour:min_cust_per_hour,
-      max_cust_per_hour:max_cust_per_hour,
-      avg_cookies_per_sale: avg_cookies_per_sale,
-      id: storeList
+    const storeList = {
+      location:event.target.location.value,
+      min_cust_per_hour:event.target.min_cust_per_hour.value,
+      max_cust_per_hour:event.target.max_cust_per_hour.value,
+      avg_cookies_per_sale: event.target.avg_cookies_per_sale.value,
     }
 
-    setStoreList([...storeList, newStore])
+    setStoreList(storeList)
   }
   
   return (
@@ -33,7 +33,7 @@ export default function CookieStandAdmin() {
       </Head>
       <Header />
       <main className='p-6 bg-emerald-50'>
-        <CreateForm onCreate={handleCreate} />
+        <CreateForm handleCreate={handleCreate} />
         <Table storeList={storeList} /> 
       </main>
       <Footer />
