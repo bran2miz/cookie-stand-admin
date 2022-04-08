@@ -1,13 +1,8 @@
 
 export default function CreateForm(props) {
-  function handleSubmit(event) {
-    event.preventDefault;
-
-    props.onCreate(event.target.location.value, Number(event.target.min_cust_per_hour.value), Number(event.target.max_cust_per_hour.value), Number(event.target.avg_cookies_per_sale.value))
-
-  }
+  
   return(
-    <form onSubmit={handleSubmit} className="w-11/12 px-3 pb-2 mx-auto text-sm rounded-lg bg-emerald-300">
+    <form onSubmit={props.handleCreate} className="w-11/12 px-3 pb-2 mx-auto text-sm rounded-lg bg-emerald-300">
       <h2 className="p-3 text-xl font-bold text-center">Create Cookie Stand</h2>
         <div className="flex m-2">
           <label className="pr-2">Location</label>
