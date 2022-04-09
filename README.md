@@ -5,7 +5,7 @@
 Author: Brandon Mizutani
 Version (1.0.0) [Pull Request](https://github.com/bran2miz/cookie-stand-admin/pull/4)
 
-Version (1.0.1) [Pull Request]()
+Version (1.0.1) [Pull Request](https://github.com/bran2miz/cookie-stand-admin/pull/5)
 
 This app, entitled Cookie-Stand-Admin, uses Next.js and is styled using Tailwind CSS.
 
