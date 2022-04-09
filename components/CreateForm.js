@@ -6,25 +6,25 @@ export default function CreateForm(props) {
       <h2 className="p-3 text-xl font-bold text-center">Create Cookie Stand</h2>
         <div className="flex m-2">
           <label className="pr-2">Location</label>
-          <input name="location" type="text" className="flex-grow" placeholder="Barcelona" required></input>
+          <input name="location" type="text" className="flex-grow" required></input>
         </div>
 
         <div className="flex mt-5">
-          <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-300">
+          <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-200">
           <label className="block mx-auto text-center">
             Minimum Customers per Hour
           </label>
-          <input name="min_cust_per_hour" type="text" placeholder="2" className="w-full"></input>
+          <input name="min_cust_per_hour" type="text"  className="w-full"></input>
         </div>
-        <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-300">
+        <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-200">
           <label className="block mx-auto text-center">
             Maximum Customers per Hour
           </label>
-          <input name="max_cust_per_hour" type="text" placeholder="4" className="w-full"></input>
+          <input name="max_cust_per_hour" type="text" className="w-full"></input>
         </div>
-        <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-300">
+        <div className="w-1/4 p-2 mx-1 my-2 rounded bg-emerald-200">
           <label className="block text-center">Average Cookies per Sale</label>
-          <input name="avg_cookies_per_sale" type="text" placeholder="2.5"
+          <input name="avg_cookies_per_sale" type="text"
           className="w-full">
 
           </input>
