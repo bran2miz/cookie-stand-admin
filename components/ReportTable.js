@@ -1,78 +1,58 @@
+import { hours } from "../hours";
 
-// export default function ReportTable({storeList}) {
-//   return(
-//     <div className = "p-3 text-center">
-//     <p className='mt-6 text-center'> Report Table Coming Soon...</p> 
-//     <p className='mt-6'>{"{"}&quot;location&quot;:{storeList.location},&quot;minCustomers&quot;:{storeList.min_cust_per_hour},&quot;maxCustomers&quot;:{storeList.max_cust_per_hour},&quot;avgCookies&quot;:{storeList.avg_cookies_per_sale}{"}"}
-//     </p>
-//     </div>
-//   )
-//   }
-
-export default function ReportTable({hours,storeList}) {
-  function getStoreList() {
-    if (storeList.length === 0 ) {
-      return <h2 className="flex mx-auto px-96">No Cookie Stands Available</h2>
+export default function ReportTable({ stands, deleteStand }) {
+    if (stands && stands.length == 0) {
+        return (
+            <h2 className="w-8/12 mx-auto mt-5 text-2xl font-medium text-center">No Cookie Stands Available</h2>
+        )
+    } else {
+        return (
+            <table className="w-8/12 px-3 pb-2 mx-auto my-5 text-sm bg-green-400">
+                <thead>
+                    <tr>
+                        <th className="border border-black">Location</th>
+                        {hours.map(hour => <th key={hour} className="border border-black">{hour}</th>)}
+                        <th className="border border-black">Totals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {stands.map(stand => (
+                        <CookieStandRow key={stand.id} info={stand} deleteStand={deleteStand} />
+                    ))}
+                    <tr>
+                        <td className="font-bold text-center border border-black">Totals</td>
+                        {hours.map(hour => <td key={hour} className="font-bold text-center border border-black">N/A</td>)}
+                        <td className="font-bold text-center border border-black">N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+        );
     }
-    else {
-      return <Table hours={hours} storeList={storeList} />
-    }
-  }
-  return (
-    <>
-      {getStoreList()}
-    </>
-  )
+}
 
-  function Table({hours, storeList}) {
-    return(
-      <table className="w-11/12 mx-auto mt-8 rounded-md bg-emerald-500">
-        <thead>
-          <tr>
-            <th> 
-              Location
-            </th>
-            {hours.map((hour) => (<th key={hour}>{hour}</th>))}
-            <th>
-              Totals
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {storeList.map(store =>(
-            <tr key={store.id} className="odd:bg-emerald-400 even:bg-emerald-300">
-              <td className="pl-2 border border-black bg ">
-                {store.location}
-              </td>
-              {store.hourly_sales.map(sale =>
-              <td key={sale} className="pl-2 border border-black ">
-                {sale}
-              </td>
-              )}
-              <td className="pl-2 border border-black ">
-              {store.hourly_sales.reduce((prev,curr) => prev + curr, 0)}
-              </td>
-            </tr>
-          ))}
-          <tr>
-            <td className="pl-2 font-bold border border-black bg-emerald-500">
-              Totals
+function CookieStandRow({ info, deleteStand }) {
+
+    function clickHandler() {
+        deleteStand(info.id);
+    }
+
+    if (info.hourly_sales.length == 0) {
+        info.hourly_sales = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
+
+    return (
+        <>
+        <tr>
+            <td className="font-medium text-center bg-green-200 border border-black">{info.location} 
+                <button onClick={clickHandler}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                </button>
             </td>
-            {hours.map((hour, idx)=> (
-              <td key ={hour} className="pl-2 font-bold border border-black">
-                {storeList.reduce((prev, curr) => prev + curr.hourly_sales[idx], 0
-                )}
-              </td>
-            ))}
-            <td>
-              {hours.map((hour, idx) => storeList.reduce((prev, curr) => prev + curr.hourly_sales[idx],0
-                )
-              ).reduce((prev, curr)=> prev + curr,0)
-              }
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    )
-  }
+            {info.hourly_sales.map((slot, index) => <td key={index} className="text-center bg-green-200 border border-black">{slot}</td>)}
+            <td className="font-medium text-center bg-green-200 border border-black">{info.hourly_sales.reduce((num, sum) => num + sum, 0)}</td>
+        </tr>
+        </>
+    );
 }

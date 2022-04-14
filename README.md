@@ -57,3 +57,5 @@ Connor Boyce
 ## Sources
 
 [Source 1](https://stackoverflow.com/questions/61675192/how-to-get-sum-of-all-map-values-in-javascript)
+
+[Source 2](https://heroicons.com/)
