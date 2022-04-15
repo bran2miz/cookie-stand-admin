@@ -2,7 +2,6 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import CreateForm from "../components/CreateForm"
 
-import { hours } from '../hours'
 import { useState } from 'react'
 import useResource from '../hooks/useResource'
 import ReportTable from '../components/ReportTable'
@@ -22,7 +21,7 @@ export default function CookieStandAdmin({ user, logout }) {
         <main className="p-6 bg-emerald-50">
   
           <CreateForm />
-          <ReportTable hours={hours} stands={resources || []} deleteStand={deleteResource} />
+          <ReportTable stands={resources || []} deleteStand={deleteResource} />
           
 
   
