@@ -83,17 +83,28 @@ export default function CreateForm(props) {
     const { user } = useAuth();
     const { createResource } = useResource();
 
+    const hourlySales = [48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36]
+
+    function simulateSales(maximum_customers_per_hour, minimum_customers_per_hour, average_cookies_per_sale) {
+      let sales = []
+      for (let i = 0; i < hourlySales.length; i++) {
+          let customers = Math.floor(Math.random() * (maximum_customers_per_hour - minimum_customers_per_hour + 1)) + minimum_customers_per_hour
+          let cookies = parseInt(customers * average_cookies_per_sale)
+          sales.push(cookies)
+      }
+      return sales
+  }
     function handleSubmit(event) {
       event.preventDefault();
 
-      const stand = {
+      const report = {
         location: event.target.location.value,
         minimum_customers_per_hour: parseInt(event.target.minimum_customers_per_hour.value),
         maximum_customers_per_hour: parseInt(event.target.maximum_customers_per_hour.value),
         average_cookies_per_sale: parseFloat(event.target.average_cookies_per_sale.value),
         owner: user.id,
       }
-      createResource(stand)
+      createResource(report)
       // props.onCreate(event.target.location.value, event.target.min.value, event.target.max.value, event.target.avg.value)
     }
 
